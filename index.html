@@ -41,31 +41,41 @@
                 container.appendChild(content);
                 console.log(i);
             }
-        }
-
-        // function resizeGrid(gridSize){
-        //     container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
-        //     container.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
-        // }
-
-        makeGrid(inputGrid);
 
         const cells = document.querySelectorAll('.cell');
-        
         cells.forEach((cell) =>{
             cell.addEventListener('mouseover', () =>{
                 cell.style.backgroundColor = 'black';
             });
         });
+        }
+
+        function removeGrid(){
+            const content = document.querySelectorAll('.cell');
+            content.forEach(cont =>{
+                container.removeChild(cont);
+            });
+        }
+
+        function resizeGrid(gridSize){
+            container.style.display = 'grid';
+            container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+            container.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+            container.style.gap = '1px';
+        }
+
+        makeGrid(inputGrid);
+
 
         const btn = document.querySelector('.reset');
         btn.addEventListener('click', () => {
-            cells.forEach((cell) =>{
-                cell.removeAttribute('style');
-            });
-            // inputGrid = prompt('How many square per side you want?');
-            // makeGrid(inputGrid);
-            // resizeGrid(inputGrid);
+            // cells.forEach((cell) =>{
+            //     cell.removeAttribute('style');
+            // });
+            inputGrid = prompt('How many square per side you want?');
+            removeGrid();
+            resizeGrid(inputGrid);
+            makeGrid(inputGrid);
         });
     }
         
