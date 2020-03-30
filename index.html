@@ -5,28 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch-a-Sketch</title>
     <style>
-        h1{
+        body{
             text-align: center;
         }
         .container{
             max-width: 960px;
+            min-height: 60vh;
             margin: 0 auto;
-            background-color: grey;
+            border: 2px solid blue;
         }
+        
+
+        
     </style>
 </head>
 <body>
-        <h1>Etch-A-Sketch</h1>
-    <div class="container">
+    <h1>Etch-A-Sketch</h1>
+    <button class="reset">Reset</button>
+    <div class="container" style="display: grid; grid-template-columns: repeat(16, 1fr); grid-template-rows: repeat(16, 1fr); gap: 1px;">
 
     </div>
 
 
     <script>
-        const container = document.querySelector('#container');
+    window.onload = () =>{
+        let inputGrid = 16;
+        const container = document.querySelector('.container');
 
-        const content = document.createElement('div');
-        content.classList.add('content');
+        function makeGrid(gridLength){
+            inputGrid = Math.pow(gridLength,2);
+
+            for (let i = 0; i < inputGrid; i++){
+                content = document.createElement('div');
+                content.classList.add('cell');
+                container.appendChild(content);
+                console.log(i);
+            }
+        }
+
+        // function resizeGrid(gridSize){
+        //     container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+        //     container.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+        // }
+
+        makeGrid(inputGrid);
+
+        const cells = document.querySelectorAll('.cell');
+        
+        cells.forEach((cell) =>{
+            cell.addEventListener('mouseover', () =>{
+                cell.style.backgroundColor = 'black';
+            });
+        });
+
+        const btn = document.querySelector('.reset');
+        btn.addEventListener('click', () => {
+            cells.forEach((cell) =>{
+                cell.removeAttribute('style');
+            });
+            // inputGrid = prompt('How many square per side you want?');
+            // makeGrid(inputGrid);
+            // resizeGrid(inputGrid);
+        });
+    }
+        
     </script>
 </body>
 </html>
